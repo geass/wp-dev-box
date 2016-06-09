@@ -1,0 +1,15 @@
+---
+# Install the package "PHP"
+- name: Php 7 | Add APT repository
+  apt_repository: repo='ppa:ondrej/php'
+
+- apt: name={{item}} state=present
+  with_items:
+   - php
+   - php7.0-mysql
+   - php7.0-cli
+   - php7.0-curl
+   - php7.0-xsl
+   - php7.0-zip
+   - php7.0-fpm
+

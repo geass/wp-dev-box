@@ -1,0 +1,18 @@
+server {
+        server_name  _;
+        return 302 $scheme://{{ server_name }}$request_uri;
+}
+
+server {
+        server_name {{ server_name }};
+        root {{ frontend_folder }};
+
+        index index.php;
+
+        include global/restrictions.conf;
+
+        # Additional rules go here.
+
+        # Only include one of the files below.
+        include global/wordpress.conf;
+}

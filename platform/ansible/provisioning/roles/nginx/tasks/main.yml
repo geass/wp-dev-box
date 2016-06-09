@@ -1,0 +1,27 @@
+---
+- name: Nginx | Add APT repository
+  apt_repository: repo='ppa:nginx/stable' update_cache=yes
+
+- name: ensure nginx latest stable is installed
+  apt: pkg=nginx state=latest update_cache=true
+
+- name: Create nginx configuration file
+  template: src=default dest=/etc/nginx/sites-enabled/default
+
+- name: Create nginx conf
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: Creates global directory
+  file: path=/etc/nginx/global state=directory
+
+- name: Create restrictions conf
+  template: src=restrictions.conf dest=/etc/nginx/global/restrictions.conf
+
+- name: Create wordpress conf
+  template: src=wordpress.conf dest=/etc/nginx/global/wordpress.conf
+
+- name: remove html directory of nginx
+  file: path=/var/www/html state=absent
+
+- name: nginx service state
+  shell: service nginx restart

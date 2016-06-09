@@ -1,0 +1,19 @@
+---
+- include_vars: ../provisioning/group_vars/mysql.yml
+
+- name: remove wordpress directory of nginx
+  file: path={{ frontend_folder }} state=absent
+
+- name: create new wordpress directory of nginx
+  file: path={{ frontend_folder }} state=directory
+
+- name: Clone the wordpress repo
+  git: 
+    repo: https://github.com/wordpress/wordpress
+    dest: "{{ frontend_folder }}"
+    accept_hostkey: yes
+    force: yes
+  sudo: yes
+
+- name: Create wordpress configuration file
+  template: src=wp-config.php dest={{ frontend_folder }}/wp-config.php

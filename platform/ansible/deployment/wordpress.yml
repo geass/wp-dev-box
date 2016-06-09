@@ -1,0 +1,12 @@
+---
+- name: Wordpress Deploy PlayBook
+  hosts: vagrant
+  user: vagrant
+  sudo: yes
+  vars:
+  - p_name: "wordpress"
+  - frontend_folder: "/var/www/wordpress"
+  - env: "production"
+  - server_name: "wordpress.dev"
+  roles:
+    - wordpress 

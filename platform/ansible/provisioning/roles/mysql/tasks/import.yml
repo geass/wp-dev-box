@@ -1,0 +1,4 @@
+---
+- copy: src=store-locator.sql dest=/tmp
+
+- mysql_db: name={{ mysql_databases[0].name }} state=import target=/tmp/store-locator.sql

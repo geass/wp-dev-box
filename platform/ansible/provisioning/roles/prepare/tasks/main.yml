@@ -1,0 +1,19 @@
+---
+
+- name : Update apt
+  apt: update_cache=yes
+
+- name: set locale
+  apt: name={{item}} state=present
+  with_items:
+   - language-pack-en-base
+
+- name : Build essential common
+  apt: name={{item}} state=present
+  with_items:
+   - build-essential
+
+- name : Software properties common
+  apt: name={{item}} state=present
+  with_items:
+   - software-properties-common

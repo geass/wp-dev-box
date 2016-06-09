@@ -1,0 +1,18 @@
+---
+- name: Install CURL
+  apt: pkg=curl state=latest
+
+- name: Download wp-cli
+  shell: "curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
+  args:
+    chdir: "/opt"
+
+- name: Give run permission to wp-cli.phar
+  shell: "chmod ugo+x wp-cli.phar"
+  args:
+    chdir: "/opt"
+
+- name: Move phar to bin
+  shell: "sudo mv wp-cli.phar /usr/local/bin/wp"
+  args:
+    chdir: "/opt"

@@ -1,0 +1,16 @@
+---
+- name: Wordpress Provision PlayBook
+  hosts: vagrant
+  user: vagrant
+  sudo: yes
+  vars:
+  - p_name: "wordpress"
+  - frontend_folder: "/var/www/wordpress/"
+  - server_name: "wordpress.dev"
+  - env: "vagrant"
+  roles:
+    - prepare
+    - nginx
+    - mysql
+    - php7
+    - util
